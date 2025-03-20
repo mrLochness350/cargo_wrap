@@ -5,5 +5,7 @@ edition = "2024"
 readme = "README.md"
 license = "MIT"
 repository = "https://github.com/mrLochness350/cargo_wrap"
+description = "A small rust wrapper that allows the usage of cargo as a library"
+
 [dependencies]
 toml = "0.8.20"
