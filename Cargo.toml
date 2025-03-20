@@ -1,0 +1,9 @@
+[package]
+name = "cargo_wrap"
+version = "0.1.0"
+edition = "2024"
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/mrLochness350/cargo_wrap"
+[dependencies]
+toml = "0.8.20"
