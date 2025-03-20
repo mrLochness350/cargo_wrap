@@ -1,8 +1,11 @@
-Cargo-Wrap
--------------------------------------
+# Cargo-Wrap
+
+![Crates.io Version](https://img.shields.io/crates/v/cargo_wrap?link=https%3A%2F%2Fcrates.io%2Fcrates%2Fcargo_wrap)
+
 This crate is basically just Rust bindings for `cargo`. For now supports the following flags and features:
 
 ## Features
+
 * Verbose logging (`--verbose`)
 * Release or Debug build modes (`--release`)
 * Custom job counts (`--jobs N`)
@@ -16,6 +19,7 @@ This crate is basically just Rust bindings for `cargo`. For now supports the fol
 ```shell
 cargo add cargo_wrap
 ```
+
 ```toml
 cargo_wrap = "0.1.0"
 ```
@@ -40,6 +44,7 @@ fn main() -> io::Result<()> {
 ```
 
 ### Enable Features
+
 ```rust
 use cargo_wrap::{Builder, ProjectSettings};
 use std::io;
@@ -56,4 +61,5 @@ fn main() -> io::Result<()> {
 ```
 
 ## License
+
 MIT
