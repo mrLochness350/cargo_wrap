@@ -126,13 +126,15 @@ impl ProjectSettings {
 /// * `thread_count` - Optional number of jobs (`--jobs N`) to use during the build. Default value is 0.
 /// * `output_path` - Optional log file to store output.
 /// * `verbose_build` - If `true`, enables verbose output (`--verbose`).
+/// * `additional_flags` - Optional flags to pass to the `rustc` binary (via the `RUSTFLAGS` environment variable)
 #[derive(Default, Debug)]
 pub struct Builder {
     cargo_path: PathBuf,
     project_settings: ProjectSettings,
     thread_count: usize,
     output_path: Option<PathBuf>,
-    verbose_build: bool
+    verbose_build: bool,
+    additional_flags: Vec<String>
 }
 
 impl Builder {
@@ -196,6 +198,11 @@ impl Builder {
         self.verbose_build = true;
     }
 
+    /// Adds a flag to the list of additional flags that will be passed to `rustc`
+    pub fn add_rustc_flag(&mut self, flag: String) {
+        self.additional_flags.push(flag);
+    }
+
     /// Executes the build process using `cargo build`.
     ///
     /// This function spawns a `cargo build` process with the specified settings,
@@ -240,6 +247,9 @@ impl Builder {
         }
         if let Some(output_path) = &self.project_settings.output_path {
             command.env("CARGO_TARGET_DIR", output_path);
+        }
+        if !self.additional_flags.is_empty() {
+            command.env("RUSTFLAGS", self.additional_flags.join(" "));
         }
         if let Some(ref target) = self.project_settings.compilation_target {
             command.arg("--target").arg(target);

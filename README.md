@@ -13,6 +13,7 @@ This crate is basically just Rust bindings for `cargo`. For now supports the fol
 * Specify build targets (`--target X`)
 * Feature listing and activation (`--features X`, `--no-default-features`)
 * Binary/Library build selection (`--bin X`, `--lib X`)
+* Extra `rustc` flags (`RUSTFLAGS`)
 
 ## Installation
 
@@ -21,7 +22,7 @@ cargo add cargo_wrap
 ```
 
 ```toml
-cargo_wrap = "0.1.0"
+cargo_wrap = "0.1.1"
 ```
 
 ## Examples
@@ -59,6 +60,13 @@ fn main() -> io::Result<()> {
     Ok(())
 }
 ```
+
+## Changelog
+### 0.1.0
+* Initial commit
+
+### 0.1.1
+* Added additional `rustc` flag support
 
 ## License
 
