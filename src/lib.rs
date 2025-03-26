@@ -22,7 +22,7 @@ use toml::Value;
 /// * `project_path` - The root directory of the Rust project.
 /// * `cargo_toml_path` - Path to the project's `Cargo.toml`.
 /// * `target` - Optional specific binary/library to build.
-#[derive(Default, Debug)]
+#[derive(Default, Debug, Clone)]
 pub struct ProjectSettings {
     compilation_target: Option<String>,
     features: Option<Vec<String>>,

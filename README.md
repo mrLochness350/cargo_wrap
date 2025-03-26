@@ -68,6 +68,9 @@ fn main() -> io::Result<()> {
 ### 0.1.1
 * Added additional `rustc` flag support
 
+### 0.1.2
+* Added `#[derive(Clone)]` support for the `ProjectSettings` struct
+
 ## License
 
 MIT
