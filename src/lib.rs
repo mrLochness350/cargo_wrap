@@ -112,6 +112,16 @@ impl ProjectSettings {
     pub fn add_feature(&mut self, feature: String) {
         self.features.get_or_insert_with(Vec::new).push(feature)
     }
+
+    /// Manually sets the build target
+    pub fn set_target(&mut self, target: String) {
+        self.target = Some(target)
+    }
+
+    /// Manually set the build output path
+    pub fn set_output_path(&mut self, path: PathBuf) {
+        self.output_path = Some(path)
+    }
 }
 
 /// The main struct responsible for building a Rust project.
@@ -132,7 +142,7 @@ pub struct Builder {
     cargo_path: PathBuf,
     project_settings: ProjectSettings,
     thread_count: usize,
-    output_path: Option<PathBuf>,
+    log_path: Option<PathBuf>,
     verbose_build: bool,
     additional_flags: Vec<String>
 }
@@ -157,7 +167,7 @@ impl Builder {
     ///   for the Rust project to be built.
     /// * `thread_count` - Optional number of parallel jobs (`--jobs N`) to use for building.
     ///   If `0`, the default job count will be used.
-    /// * `output_path` - Optional path to a log file where build output will be stored.
+    /// * `log_path` - Optional path to a log file where build output will be stored.
     ///
     /// # Returns
     ///
@@ -168,7 +178,7 @@ impl Builder {
     ///
     /// This function will return an error if:
     /// - The `CARGO` environment variable is not set, meaning `cargo` cannot be found.
-    /// - The provided `output_path` is invalid or cannot be written to.
+    /// - The provided `log_path` is invalid or cannot be written to.
     ///
     /// # Example
     /// ```rust
@@ -180,7 +190,7 @@ impl Builder {
     ///     let builder = Builder::new(settings, 4, Some("build.log"))?;
     ///     Ok(())
     /// }
-    pub fn new(project_settings: ProjectSettings, thread_count: usize, output_path:
+    pub fn new(project_settings: ProjectSettings, thread_count: usize, log_path:
     Option<impl Into<PathBuf>>) ->
                io::Result<Builder> {
         let cargo_path = Builder::get_cargo_path()?;
@@ -188,7 +198,7 @@ impl Builder {
             cargo_path,
             project_settings,
             thread_count,
-            output_path: output_path.map(Into::into),
+            log_path: log_path.map(Into::into),
             ..Default::default()
         })
     }
@@ -266,7 +276,7 @@ impl Builder {
         }
 
         let output = command.current_dir(&self.project_settings.project_path).output()?;
-        if let Some(output_log) = &self.output_path {
+        if let Some(output_log) = &self.log_path {
             let mut output_file = OpenOptions::new().create(true).append(true).open(output_log)?;
             output_file.write_all(&output.stdout)?;
             output_file.write_all(&output.stderr)?;

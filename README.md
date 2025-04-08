@@ -22,7 +22,7 @@ cargo add cargo_wrap
 ```
 
 ```toml
-cargo_wrap = "0.1.1"
+cargo_wrap = "0.1.3"
 ```
 
 ## Examples
@@ -70,6 +70,10 @@ fn main() -> io::Result<()> {
 
 ### 0.1.2
 * Added `#[derive(Clone)]` support for the `ProjectSettings` struct
+
+### 0.1.3
+* Added support for manually setting build targets
+* Added support for manually setting the project path
 
 ## License
 
