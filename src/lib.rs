@@ -122,6 +122,11 @@ impl ProjectSettings {
     pub fn set_output_path(&mut self, path: PathBuf) {
         self.output_path = Some(path)
     }
+
+    /// Manually set the project path
+    pub fn set_project_path(&mut self, path: PathBuf) {
+        self.project_path = path
+    }
 }
 
 /// The main struct responsible for building a Rust project.
