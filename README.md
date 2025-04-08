@@ -22,7 +22,7 @@ cargo add cargo_wrap
 ```
 
 ```toml
-cargo_wrap = "0.1.4"
+cargo_wrap = "0.1.5"
 ```
 
 ## Examples
@@ -77,6 +77,9 @@ fn main() -> io::Result<()> {
 
 ### 0.1.4
 * Added support for manually setting the project path
+
+### 0.1.5
+* Fixed feature bug
 
 ## License
 

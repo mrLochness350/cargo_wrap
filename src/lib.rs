@@ -270,8 +270,10 @@ impl Builder {
             command.arg("--target").arg(target);
         }
         if let Some(features) = &self.project_settings.features {
-            command.arg("--features");
-            features.iter().for_each(|f| { command.arg(f); });
+            features.iter().for_each(|f| {
+                command.arg("--features");
+                command.arg(f);
+            });
         }
         if self.project_settings.no_default_features {
             command.arg("--no-default-features");
